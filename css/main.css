@@ -352,6 +352,17 @@ nav {
 .pin-wrapper {
   bottom: 0 !important; /*this is overwriting scrollmagic's default*/
 }
+
+.nav-trigger {
+  z-index: 100;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 50px;
+  height: 10px;
+  background: green;
+}
+
   /* ===== slides styles ===== */
   .slide {
     height: auto;

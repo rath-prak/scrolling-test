@@ -104,6 +104,10 @@ body {
    Author's custom styles
    ========================================================================== */
 
+html, body {
+  height: 100%
+}
+
 /* ===== logo ===== */
 
 .logo {
@@ -158,33 +162,7 @@ body {
 /* ===== Navigation ===== */
 
 .nav-container {
-  position: absolute;
-  top: 40%;
-  margin-top: 270px;
-  width: 37%;
-  z-index: 20;
-  height: 10px;
-}
-nav {
-  position: absolute;
-  right: 7%;
-  width: 240px;
-  height: 24px;
-  display: block;
-}
-.nav-items {
-  margin: 0;
-  padding: 0;
-  position: absolute;
-  top: 6px;
-}
-.nav-items li {
-  width: 12px;
-  height: 12px;
-  background: rgba(0, 0, 0, 0.2);
-  float: left;
-  margin-right: 14px;
-  border-radius: 50%;
+  display: none;
 }
 
 /* ===== slides styles ===== */
@@ -305,7 +283,75 @@ nav {
     height: 124px;
 
   }
+  /* ===== Navigation ===== */
 
+.nav-container {
+  position: absolute;
+  top: 40%;
+  margin-top: 270px;
+  width: 37%;
+  z-index: 20;
+  display: block;
+}
+nav {
+  position: absolute;
+  right: 7%;
+  width: 240px;
+  height: 24px;
+  display: block;
+}
+.nav-items {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 6px;
+}
+.nav-items li {
+  width: 12px;
+  height: 12px;
+  float: left;
+  margin-right: 14px;
+  border-radius: 100%;
+  position: relative;
+  left: 6px;
+  overflow: hidden;
+
+}
+.nav-items a {
+  display: block;
+  text-indent: -9999em;
+  width: 100%;
+  height: 100%;
+  transition: background .3s linear;
+  background: rgba(0, 0, 0, 0.1);
+}
+.nav-items .active a {
+  background: #fc866e;
+}
+.nav-active {
+  width: 22px;
+  height: 22px;
+  border: 1px #fc866e solid;
+  border-radius: 100%;
+  transition: border-color .3s linear;
+
+}
+
+  /* ===== Fake height ===== */
+
+.fake-height {
+  height: 900%; /*this is for the 9 slides, 9 times the viewport height and controls duration of scrolling*/
+}
+#main {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+}
+
+.pin-wrapper {
+  bottom: 0 !important; /*this is overwriting scrollmagic's default*/
+}
   /* ===== slides styles ===== */
   .slide {
     height: auto;
@@ -421,6 +467,33 @@ nav {
     #slide09 .primary{
         color:#E7395C;
     }
+
+    .slide01-active .nav-active {border-color: #FC866E;}
+    .slide01-active .nav-items .active a {background-color:#FC866E;}
+     
+    .slide02-active .nav-active {border-color: #6C45BB;}
+    .slide02-active .nav-items .active a {background-color:#6C45BB;}
+     
+    .slide03-active .nav-active {border-color: #2D5978;}
+    .slide03-active .nav-items .active a {background-color:#2D5978;}
+     
+    .slide04-active .nav-active {border-color: #B33259;}
+    .slide04-active .nav-items .active a {background-color:#B33259;}
+     
+    .slide05-active .nav-active {border-color: #71B26C;}
+    .slide05-active .nav-items .active a {background-color:#71B26C;}
+     
+    .slide06-active .nav-active {border-color: #AE87AC;}
+    .slide06-active .nav-items .active a {background-color:#AE87AC;}
+     
+    .slide07-active .nav-active {border-color: #E7395C;}
+    .slide07-active .nav-items .active a {background-color:#E7395C;}
+     
+    .slide08-active .nav-active {border-color: #246C9D;}
+    .slide08-active .nav-items .active a {background-color:#246C9D;}
+     
+    .slide09-active .nav-active {border-color: #E7395C;}
+    .slide09-active .nav-items .active a {background-color:#E7395C;}
     
 }
 

@@ -95,7 +95,7 @@ $(document).ready(function(){
 				direction = e.scrollDirection;
 			
 			//console.log(e.scrollDirection);
-			crossFade($slideOut, $slideIn, direction);
+			crossFade($slideOut, $slideIn, direction, slideIndex);
 
 		})
 		// .addIndicators({
@@ -149,13 +149,40 @@ $(document).ready(function(){
 	init();
 
 	// cross fade
-	function crossFade($slideOut, $slideIn, direction){
+	function crossFade($slideOut, $slideIn, direction, slideIndex){
 
 		var slideOutID = $slideOut.attr('id').substring(5,7),
-				slideInID = $slideIn.attr('id').substring(5,7);
+				slideInID = $slideIn.attr('id').substring(5,7),
+
+				$slideOutBcg = $slideOut.find('.bcg-color'),
+				$slideOutTitle = $slideOut.find('.title .fade-txt'),
+				$slideOutNumber = $slideOut.find('.number'), 
+
+				$slideInBcg = $slideIn.find('.bcg-color'),
+				$slideInTitle = $slideIn.find('.title .fade-txt'),
+				$slideInNumber = $slideIn.find('.number'), 
+				$slideInBcgWhite = $slideIn.find('.primary .bcg')
+
 
 		//update nav
 		updateNav(slideOutID, slideInID);
+
+		// remove active class from all slides
+		TweenMax.set($slide, {className: '-=active'})
+
+		// add class active to the current slide
+		TweenMax.set($('#slide'+slideIndex), {className: '+=active'}) 
+
+		// cross fade timeline
+		var crossFadeTl = new TimelineMax();
+
+		crossFadeTl
+			.set($slideIn, {autoAlpha: 1})
+			.set([$slideInTitle, $slideInNumber, $slideInBcgWhite], {autoAlpha: 0})
+			.to([$slideOutTitle, $slideOutNumber], 0.3, {autoAlpha: 0, ease: Linear.easeNone})
+			.set($main, {className: 'slide'+slideInID+'-active'})
+			.set($slideInNumber, {text: '0'})
+			.to($slideInNumber, 1.2, {autoAlpha: 1, ease:Linear.easeNone})
 
 	}
 

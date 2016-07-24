@@ -4,7 +4,28 @@ $(document).ready(function(){
 	var controller, 
 		$navItem = $('.nav-items li').not('.active'),
 		$navActive = $('.nav-active'),
-		$navTrigger = $('.nav-tripper')
+		$navTrigger = $('.nav-tripper'),
+		getTriggersDown = $('.slide-pos'),
+		triggersDown = [];
+
+		// triggers ob the way down
+		$.each(getTriggersDown, function(key, value){
+			var id = '#' + value.id;
+			triggersDown.push(id);
+			console.log(triggersDown);
+
+		})
+
+		// triggersDown = [
+		// "#slide02-pos",
+		// "#slide03-pos",
+		// "#slide04-pos",
+		// "#slide05-pos",
+		// "#slide06-pos",
+		// "#slide07-pos",
+		// "#slide08-pos",
+		// "#slide09-pos",
+		// ]
 
 	// initialize ScrollMagic controller
 	controller = new ScrollMagic.Controller();
@@ -41,6 +62,44 @@ $(document).ready(function(){
 	})
 	.setTween(navTl)
 	.addTo(controller);
+
+	// scene 3 - trigger the right animation on the way DOWN
+
+	triggersDown.forEach(function(triggerDown, index){
+		var triggerTransitionToNext = new ScrollMagic.Scene({
+			triggerElement: triggerDown,
+			triggerHook: 0.6
+		})
+		.on('enter', function(e){
+			console.log('crossfade to next', triggerDown)
+		})
+		.addIndicators({
+			name: "triggerDown", 
+			index: 500,
+			colorStart: "yellow",
+			colorTrigger: "yellow" 
+		})
+		.addTo(controller)
+	});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -363,6 +363,25 @@ nav {
   background: green;
 }
 
+.slide-pos {
+  z-index: 100;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50px;
+  height: 10px;
+  background: yellow;
+}
+#slide02-pos {top: 140%;}
+#slide03-pos {top: 240%;}
+#slide04-pos {top: 340%;}
+#slide05-pos {top: 440%;}
+#slide06-pos {top: 540%;}
+#slide07-pos {top: 640%;}
+#slide08-pos {top: 740%;}
+#slide09-pos {top: 840%;}
+
+
   /* ===== slides styles ===== */
   .slide {
     height: auto;

@@ -372,6 +372,7 @@ nav {
   height: 10px;
   background: yellow;
 }
+
 #slide02-pos {top: 140%;}
 #slide03-pos {top: 240%;}
 #slide04-pos {top: 340%;}
@@ -380,6 +381,26 @@ nav {
 #slide07-pos {top: 640%;}
 #slide08-pos {top: 740%;}
 #slide09-pos {top: 840%;}
+
+.slide-pos-reverse {
+  z-index: 100;
+  position: absolute;
+  top: 70%;
+  left: 75%;
+  width: 50px;
+  height: 10px;
+  background: green;
+  visibility: hidden;
+}
+
+#slide02-pos-reverse {top: 170%;}
+#slide03-pos-reverse {top: 270%;}
+#slide04-pos-reverse {top: 370%;}
+#slide05-pos-reverse {top: 470%;}
+#slide06-pos-reverse {top: 570%;}
+#slide07-pos-reverse {top: 670%;}
+#slide08-pos-reverse {top: 770%;}
+
 
 
   /* ===== slides styles ===== */

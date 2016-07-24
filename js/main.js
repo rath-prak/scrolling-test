@@ -6,26 +6,24 @@ $(document).ready(function(){
 		$navActive = $('.nav-active'),
 		$navTrigger = $('.nav-tripper'),
 		getTriggersDown = $('.slide-pos'),
-		triggersDown = [];
+		triggersDown = [],
+		getTriggersUp = $('.slide-pos-reverse'),
+		triggersUp = [];
 
 		// triggers ob the way down
 		$.each(getTriggersDown, function(key, value){
 			var id = '#' + value.id;
 			triggersDown.push(id);
-			console.log(triggersDown);
+			// console.log(triggersDown[key]);
 
 		})
 
-		// triggersDown = [
-		// "#slide02-pos",
-		// "#slide03-pos",
-		// "#slide04-pos",
-		// "#slide05-pos",
-		// "#slide06-pos",
-		// "#slide07-pos",
-		// "#slide08-pos",
-		// "#slide09-pos",
-		// ]
+		// triggers on the way up
+		$.each(getTriggersUp, function(key, value){
+			var id = '#' + value.id;
+			triggersUp.push(id);
+			// console.log(triggersUp[key])
+		})
 
 	// initialize ScrollMagic controller
 	controller = new ScrollMagic.Controller();
@@ -71,7 +69,15 @@ $(document).ready(function(){
 			triggerHook: 0.6
 		})
 		.on('enter', function(e){
-			console.log('crossfade to next', triggerDown)
+			// console.log('crossfade to next', triggerDown)
+			var $slideOut = ('.slide.active'),
+					slideIndex = triggerDown.substring(6,8),
+					$slideIn = $('#slide' + slideIndex), 
+					direction = e.scrollDirection;
+
+			// console.log(e.scrollDirection)		
+			crossFade($slideOut, $slideIn, direction); // this is where the main animations between the scrolling will take place.
+
 		})
 		.addIndicators({
 			name: "triggerDown", 
@@ -80,22 +86,32 @@ $(document).ready(function(){
 			colorTrigger: "yellow" 
 		})
 		.addTo(controller)
-	});
+	}); // end of trigger function
+
+	// scene 4 - trigger the right animation on the way UP
+
+		triggersUp.forEach(function(triggerUp, index){
+		var triggerTransitionToPrev = new ScrollMagic.Scene({
+			triggerElement: triggerUp,
+			triggerHook: 0.49
+		})
+		.on('leave', function(e){
+			// console.log('crossfade to previous', triggerUp)
+		})
+		// .addIndicators({
+		// 	name: "triggerUp", 
+		// 	index: 110,
+		// 	colorStart: "black",
+		// 	colorTrigger: "black" 
+		// })
+		.addTo(controller)
+	}); // end of trigger function
 
 
+		// cross fade fucntion goes here
+		function crossFade($slideOut, $slideIn, direction){
 
-
-
-
-
-
-
-
-
-
-
-
-
+		}
 
 
 

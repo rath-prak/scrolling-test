@@ -161,17 +161,18 @@ $(document).ready(function(){
 				$slideInBcg = $slideIn.find('.bcg-color'),
 				$slideInTitle = $slideIn.find('.title .fade-txt'),
 				$slideInNumber = $slideIn.find('.number'), 
-				$slideInBcgWhite = $slideIn.find('.primary .bcg')
+				$slideInBcgWhite = $slideIn.find('.primary .bcg'), 
+				slideInValue = $slideInNumber.attr('data-value');
 
 
 		//update nav
 		updateNav(slideOutID, slideInID);
 
 		// remove active class from all slides
-		TweenMax.set($slide, {className: '-=active'})
+		TweenMax.set($slide, {className: '-=active'});
 
 		// add class active to the current slide
-		TweenMax.set($('#slide'+slideIndex), {className: '+=active'}) 
+		TweenMax.set($('#slide'+slideIndex), {className: '+=active'}); 
 
 		// cross fade timeline
 		var crossFadeTl = new TimelineMax();
@@ -182,14 +183,34 @@ $(document).ready(function(){
 			.to([$slideOutTitle, $slideOutNumber], 0.3, {autoAlpha: 0, ease: Linear.easeNone})
 			.set($main, {className: 'slide'+slideInID+'-active'})
 			.set($slideInNumber, {text: '0'})
-			.to($slideInNumber, 1.2, {autoAlpha: 1, ease:Linear.easeNone})
+			.add('countingUp')
+			.fromTo($slideInBcg, 0.7, {autoAlpha: 0}, {autoAlpha: 1, ease: Linear.easeNone})
+			.staggerFromTo($slideInTitle, 0.3, {autoAlpha: 0, x: "-=20"}, {autoAlpha: 1, x: 0, ease: Power1.easeOut}, 0.1, 'countingUp+=1.1');
 
-	}
+		var countUpText =  new TimelineMax({pause: true});
+
+		//fade number in
+		countUpText.to($slideInNumber, 1.2, {autoAlpha: 1, ease:Linear.easeNone, onUpdate: updateValue, onUpdateParams: ['{self}', slideInValue, $slideInNumber]});
+
+		var countUpTl = new TimelineMax();
+		countUpTl.to(countUpText, 1, {progress: 1, ease: Power3.easeOut});
+
+		crossFadeTl.add(countUpTl, 'countingUp'); // this is two time lines in one function
+		}
+
+	function updateValue(tl, slideInValue, $slideInNumber){
+		var newValue = parseInt(tl.progress() * slideInValue);
+			if(slideInValue == 100){
+				$slideInNumber.text(newValue);
+			}else{
+				$slideInNumber.text(newValue+'%');
+			}
+	}	
 
 	function updateNav(slideOutID, slideInID){
 		$('.nav-items li').removeClass('active');
-		TweenMax.set($('.nav-items li.nav-item'+slideInID), {className: '+=active'})
-	}	
+		TweenMax.set($('.nav-items li.nav-item'+slideInID), {className: '+=active'});
+	}
 
 	// animate slide IN
 	function animationIn($slideIn){
@@ -213,7 +234,7 @@ $(document).ready(function(){
 			.staggerFrom($slideInTitle, 0.3, {autoAlpha: 0, x: '-=60', ease:Power1.easeOut}, 0.1, 'fadeInLogo+=0.9')
 			.fromTo($nav, 0.3, {y: -15, autoAlpha: 0}, {autoAlpha: 1, y: 0, ease:Power1.easeOut}, 'fadeInLogo+=1.5')
 			;
-			transitionInTl.timeScale(3)
+			// transitionInTl.timeScale(3);
 	}
 
 });
